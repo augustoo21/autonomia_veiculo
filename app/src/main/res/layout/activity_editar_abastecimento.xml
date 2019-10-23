@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".editar_abastecimento">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/atual_km_material"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/km_atual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quilometragem atual" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/abastecido_litro_material"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/atual_km_material">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/litro_abastecido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Litros abastecido" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/abastecimento_data_material"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/abastecido_litro_material">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/data_abastecimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="selecionarData"
+            android:hint="Data do abastecimento" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/tipo_posto_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/abastecimento_data_material"
+        app:ms_enableFloatingLabel="true"
+        app:ms_floatingLabelText="Posto"
+        app:ms_hint="Selecione" />
+
+    <Button
+        android:id="@+id/btn_salvar_editaar_activity"
+        android:layout_width="271dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="298dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="17dp"
+        android:text="Salvar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_spinner" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tipo_posto_material"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_spinner">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/posto_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="posto" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_excluir"
+        android:layout_width="272dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="8dp"
+        android:onClick=""
+        android:text="Excluir"
+        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_editaar_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_material" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

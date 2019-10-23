@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modelo.AdicionarAbastecimento">
+    android:layout_height="wrap_content"
+    tools:context=".AdicionarAbastecimento">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/atual_km_material"
@@ -57,6 +57,7 @@
             android:id="@+id/data_abastecimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="selecionarData"
             android:hint="Data do abastecimento" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,6 +74,39 @@
         app:ms_enableFloatingLabel="true"
         app:ms_floatingLabelText="Posto"
         app:ms_hint="Selecione" />
+
+    <Button
+        android:id="@+id/btn_salvar_editaar_activity"
+        android:layout_width="271dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="298dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="17dp"
+        android:onClick="salvar"
+        android:text="Salvar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_spinner" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tipo_posto_material"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_spinner">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/posto_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="posto" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
