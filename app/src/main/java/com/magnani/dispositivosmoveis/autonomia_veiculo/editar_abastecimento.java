@@ -102,7 +102,11 @@ public class editar_abastecimento extends AppCompatActivity {
     }
 
     public void excluir(View v){
-
+        int posicaoDoObjeto = AbastecimentoDao.obterInstancia().excluiDaLista(objetoAbastecimento);
+        Intent intencaoDeFechamentoDaActivityFormulario = new Intent();
+        intencaoDeFechamentoDaActivityFormulario.putExtra("posicaoDoObjetoExcluido", posicaoDoObjeto);
+        setResult(202, intencaoDeFechamentoDaActivityFormulario);
+        finish();
 
     }
 }
