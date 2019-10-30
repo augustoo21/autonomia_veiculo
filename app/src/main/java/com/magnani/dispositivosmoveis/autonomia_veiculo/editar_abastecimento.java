@@ -46,6 +46,8 @@ public class editar_abastecimento extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         postos.setAdapter(adapter);
 
+        idDoAbastecimento = getIntent().getStringExtra("idAbastecimento");
+
         if(idDoAbastecimento == null){
             abastecimento = new Abastecimento();
             Button btnExcluir = findViewById(R.id.btnExcluir);
