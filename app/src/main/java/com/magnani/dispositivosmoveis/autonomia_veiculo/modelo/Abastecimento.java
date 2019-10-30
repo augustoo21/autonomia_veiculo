@@ -11,10 +11,18 @@ import io.realm.annotations.PrimaryKey;
 public class Abastecimento extends RealmObject {
     @PrimaryKey
     private String id;
-    private String descricao;
     private double quilometragem;
     private double qtd_litro_abastecido;
     private Date dataPura;
+    private String posto;
+
+    public String getPosto() {
+        return posto;
+    }
+
+    public void setPosto(String posto) {
+        this.posto = posto;
+    }
 
     @Ignore
     private Calendar data;
@@ -25,14 +33,6 @@ public class Abastecimento extends RealmObject {
 
     public String getId(){
         return id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public double getQuilometragem(){

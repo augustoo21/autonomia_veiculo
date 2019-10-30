@@ -24,9 +24,6 @@ public class AbastecimentoAdapter extends RecyclerView.Adapter{
         //2: associar os objetos inflados a um novo view holder
         AbastecimentoViewHolder gaveta = new AbastecimentoViewHolder(elementoPrincipalXML);
 
-        //3: retornar o view holder que foi criado no passo 2
-
-        Log.d("AULA", "Gaveta criada: "+gaveta);
 
         return gaveta;
     }
@@ -37,7 +34,6 @@ public class AbastecimentoAdapter extends RecyclerView.Adapter{
         AbastecimentoViewHolder gaveta = (AbastecimentoViewHolder) holder;
 
         gaveta.atualizaGavetaComOObjetoQueChegou(abastecimento);
-        Log.d("AULA", "Atualizou com o item na posição "+position+" a gaveta : "+gaveta);
     }
 
     @Override

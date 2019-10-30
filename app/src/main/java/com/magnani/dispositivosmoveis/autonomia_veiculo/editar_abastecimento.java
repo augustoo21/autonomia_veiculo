@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.magnani.dispositivosmoveis.autonomia_veiculo.modelo.Abastecimento;
@@ -21,52 +24,59 @@ import java.util.Calendar;
 import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class editar_abastecimento extends AppCompatActivity {
-    private Abastecimento objetoAbastecimento;
+    private Abastecimento abastecimento;
     private String idDoAbastecimento;
-    private TextInputEditText etDescricao;
-    private TextInputEditText etData;
-    private TextInputEditText etQuilometragem;
-    private TextInputEditText etQtdLitroAbastecido;
-    Button btnExcluir;
+    private EditText etKm;
+    private EditText etLitros;
+    private EditText etData;
+    private Spinner postos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_abastecimento);
-        btnExcluir = findViewById(R.id.btn_excluir);
-        etData = findViewById(R.id.data_abastecimento);
-        etDescricao = findViewById(R.id.tipo_posto_material);
-        etQuilometragem = findViewById(R.id.atual_km_material);
-        etQtdLitroAbastecido = findViewById(R.id.abastecido_litro_material);
+        etKm = findViewById(R.id.etKM);
+        etLitros = findViewById(R.id.etLitros);
+        etData = findViewById(R.id.etData);
+        postos = findViewById(R.id.spPostos);
         etData.setKeyListener(null);
 
-        String[] ITEMS = {"Shell", "Ipiranga", "Texaco", "Petrobras", "Outros"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ITEMS);
+        String[] postos_opcoes = getResources().getStringArray(R.array.posto_opcoes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, postos_opcoes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        MaterialSpinner spinner = (MaterialSpinner) findViewById(R.id.tipo_posto_spinner);
-        spinner.setAdapter(adapter);
+        postos.setAdapter(adapter);
 
-        idDoAbastecimento = getIntent().getStringExtra("idDoAbastecimento");
+        if(idDoAbastecimento == null){
+            abastecimento = new Abastecimento();
+            Button btnExcluir = findViewById(R.id.btnExcluir);
+            btnExcluir.setVisibility(View.INVISIBLE);
+        }else{
+            abastecimento = AbastecimentoDao.obterInstancia().obterObjetoPeloId(idDoAbastecimento);
+            etKm.setText(String.valueOf(abastecimento.getQuilometragem()));
+            etLitros.setText(String.valueOf(abastecimento.getQtd_litro_abastecido()));
 
-        objetoAbastecimento = AbastecimentoDao.obterInstancia().obterObjetoPeloId(idDoAbastecimento);
-        etDescricao.setText(objetoAbastecimento.getDescricao());
-        etQtdLitroAbastecido.setText(String.valueOf(objetoAbastecimento.getQtd_litro_abastecido()));
-        etQuilometragem.setText(String.valueOf(objetoAbastecimento.getQuilometragem()));
-        etDescricao.setText(objetoAbastecimento.getDescricao());
-        DateFormat formatador = android.text.format.DateFormat.getDateFormat( getApplicationContext() );
-        String dataSelecionadaFormatada = formatador.format( objetoAbastecimento.getData().getTime() );
-        etData.setText( dataSelecionadaFormatada );
+            for(int i = 0; i < postos.getAdapter().getCount(); i++){
+                if (postos.getAdapter().getItem(i).toString() == abastecimento.getPosto()){
+                    postos.setSelection(i+1);
+                    break;
+                }
+            }
+
+            DateFormat formatador = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+            String dataSelecionadaFormatada = formatador.format(abastecimento.getData().getTime());
+            etData.setText(dataSelecionadaFormatada);
+        }
     }
-    public void salvar (View v){
-        objetoAbastecimento.setDescricao(etDescricao.getText().toString());
+    public void salvar(View v){
+        abastecimento.setQuilometragem(Double.parseDouble(etKm.getText().toString()));
+        abastecimento.setQtd_litro_abastecido(Double.parseDouble(etLitros.getText().toString()));
+        abastecimento.setPosto(postos.getSelectedItem().toString());
 
         if(idDoAbastecimento == null) {
-            //está salvando
-            AbastecimentoDao.obterInstancia().adicionarNaLista(objetoAbastecimento);
+            AbastecimentoDao.obterInstancia().adicionarNaLista(abastecimento);
             setResult(201);
         }else{
-            //está editando
-            int posicaoDoObjeto = AbastecimentoDao.obterInstancia().atualizaNaLista(objetoAbastecimento);
+            int posicaoDoObjeto = AbastecimentoDao.obterInstancia().atualizaNaLista(abastecimento);
             Intent intencaoDeFechamentoDaActivityFormulario = new Intent();
             intencaoDeFechamentoDaActivityFormulario.putExtra("posicaoDoObjetoEditado", posicaoDoObjeto);
             setResult(200, intencaoDeFechamentoDaActivityFormulario);
@@ -74,8 +84,9 @@ public class editar_abastecimento extends AppCompatActivity {
         finish();
 
     }
+
     public void selecionarData(View v){
-        Calendar dataPadrao = objetoAbastecimento.getData();;
+        Calendar dataPadrao = abastecimento.getData();;
         if(dataPadrao == null){
             dataPadrao = Calendar.getInstance();
         }
@@ -87,7 +98,7 @@ public class editar_abastecimento extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar dataSelecionada = Calendar.getInstance();
                         dataSelecionada.set(year,month,dayOfMonth);
-                        objetoAbastecimento.setData(dataSelecionada);
+                        abastecimento.setData(dataSelecionada);
 
                         DateFormat formatador = android.text.format.DateFormat.getDateFormat( getApplicationContext() );
                         String dataSelecionadaFormatada = formatador.format( dataSelecionada.getTime() );
@@ -102,11 +113,21 @@ public class editar_abastecimento extends AppCompatActivity {
     }
 
     public void excluir(View v){
-        int posicaoDoObjeto = AbastecimentoDao.obterInstancia().excluiDaLista(objetoAbastecimento);
-        Intent intencaoDeFechamentoDaActivityFormulario = new Intent();
-        intencaoDeFechamentoDaActivityFormulario.putExtra("posicaoDoObjetoExcluido", posicaoDoObjeto);
-        setResult(202, intencaoDeFechamentoDaActivityFormulario);
-        finish();
-
+        new AlertDialog.Builder(this)
+                .setTitle("Você tem certeza?")
+                .setMessage("Você quer mesmo excluir?")
+                .setPositiveButton("Excluir", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int posicaoDoObjeto = AbastecimentoDao.obterInstancia().excluiDaLista(abastecimento);
+                        Intent intencaoDeFechamentoDaActivityFormulario = new Intent();
+                        intencaoDeFechamentoDaActivityFormulario.putExtra("posicaoDoObjetoExcluido", posicaoDoObjeto);
+                        setResult(202, intencaoDeFechamentoDaActivityFormulario);
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }

@@ -5,121 +5,133 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editar_abastecimento">
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/atual_km_material"
+
+    <TextView
+        android:id="@+id/labelKM"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Quilometragem Atual"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/km_atual"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Quilometragem atual" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/abastecido_litro_material"
+    <EditText
+        android:id="@+id/etKM"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/atual_km_material">
+        app:layout_constraintTop_toBottomOf="@+id/labelKM" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/litro_abastecido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Litros abastecido" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/abastecimento_data_material"
+    <TextView
+        android:id="@+id/labelLitros"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Litros Abastecidos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abastecido_litro_material">
+        app:layout_constraintTop_toBottomOf="@+id/etKM" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/data_abastecimento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="selecionarData"
-            android:hint="Data do abastecimento" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <fr.ganfra.materialspinner.MaterialSpinner
-        android:id="@+id/tipo_posto_spinner"
+    <EditText
+        android:id="@+id/etLitros"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/abastecimento_data_material"
-        app:ms_enableFloatingLabel="true"
-        app:ms_floatingLabelText="Posto"
-        app:ms_hint="Selecione" />
+        app:layout_constraintTop_toBottomOf="@+id/labelLitros" />
+
+    <TextView
+        android:id="@+id/labelData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Data do Abastecimento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLitros" />
+
+    <EditText
+        android:id="@+id/etData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:focusable="false"
+        android:onClick="selecionarData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelData" />
+
+    <TextView
+        android:id="@+id/labelPosto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Posto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etData" />
+
+    <Spinner
+        android:id="@+id/spPostos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelPosto" />
 
     <Button
-        android:id="@+id/btn_salvar_editaar_activity"
-        android:layout_width="271dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="298dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="17dp"
-        android:text="Salvar"
+        android:id="@+id/btnSalvar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="#3B495A"
         android:onClick="salvar"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Salvar"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_spinner" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tipo_posto_material"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_spinner">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/posto_tipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="posto" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/spPostos" />
 
     <Button
-        android:id="@+id/btn_excluir"
-        android:layout_width="272dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="69dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/btnExcluir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/error_color"
         android:onClick="excluir"
         android:text="Excluir"
-        app:layout_constraintBottom_toTopOf="@+id/btn_salvar_editaar_activity"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tipo_posto_material" />
+        app:layout_constraintTop_toBottomOf="@+id/spPostos" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
